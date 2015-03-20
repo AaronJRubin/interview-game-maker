@@ -15,7 +15,7 @@ main() {
   addCategoryButton.onClick.listen((e) => addCategory());
   ButtonElement resetButton = document.querySelector(".reset");
   resetButton.onClick.listen((e) {
-    if (window.confirm("本当にリセットしますか？保存されていたのも削除されますよ")) {
+    if (window.confirm("本当にリセットしますか？保存されていたのも削除されますよ。")) {
     window.localStorage.remove("categories");
     initialize();
     }
@@ -82,10 +82,14 @@ Map readCategory(DivElement categoryElement) {
   DivElement categoryDescription = categoryElement.children.first;
   TextInputElement fragmentElement = childWithClass(categoryDescription, "fragment").children.first;
   String fragment = fragmentElement.value;
+  bool possessive = fragment.startsWith("My");
+  if (possessive) {
+    fragment = fragment.replaceFirst("My ", "");
+  } else {
+    fragment = fragment.replaceFirst("I ", "");
+  }
   TextInputElement questionElement = childWithClass(categoryDescription, "question").children.first;
   String question = questionElement.value;
-  CheckboxInputElement possessiveElement = childWithClass(categoryDescription, "possessive").children.first;
-  bool possessive = possessiveElement.checked;
   UListElement itemsElement = childWithClass(categoryElement, "items");
   List<String> items = itemsElement.children.map((listItem) => listItem.children.first.value.trim()).
       where((string) => string.length > 0).toList(growable: false);
@@ -120,8 +124,6 @@ void addCategory() {
         <input type="text"></label>
         <label class="question">質問の仕方
         <input type="text"></label>
-        <label class="possessive">Iの代わりにMyで始まるか
-        <input type="checkbox"></label>
       </div>
         <div>アイテム（{}に入る英語）</div>
         <ul class="items">''');
@@ -140,24 +142,26 @@ void addCategory() {
 void createDeleteAction(int categoryID) {
   ButtonElement deleteButton = document.querySelector("#delete-$categoryID");
   deleteButton.onClick.listen((e) {
+    if (window.confirm("本当にこのカテゴリーを削除しますか？")) {
     categories.children.removeWhere((element) {
       String toDelete = deleteButton.id.split("-")[1];
       return element.id == "category-$toDelete";
     });
+    };
   });
 }
 
 void addCategoryFromMap(Map categoryMap) {
   List<String> items = categoryMap["items"];
+  String pronoun = categoryMap["possessive"] ? "My " : "I ";
+  String fragment =  pronoun + categoryMap["fragment"];
   StringBuffer html = new StringBuffer('''<li id="category-$categoryIDCounter">
       <div class="category" >
       <div class="category-description">
         <label class="fragment">文型（{アイテムは{}に入る）
-        <input type="text" value="${categoryMap["fragment"]}"></label>
+        <input type="text" value="$fragment"></label>
         <label class="question">質問の仕方
         <input type="text" value="${categoryMap["question"]}"></label>
-        <label class="possessive">Iの代わりにMyで始まるか
-        <input type="checkbox" checked=${categoryMap["possessive"]}></label>
       </div>
         <div>アイテム（{}に入る英語）</div>
         <ul class="items">''');
