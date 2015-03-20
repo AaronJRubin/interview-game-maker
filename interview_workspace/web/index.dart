@@ -6,13 +6,19 @@ import 'package:cryptoutils/cryptoutils.dart';
 
 UListElement categories = document.querySelector(".categories");
 DivElement downloads = document.querySelector(".downloads");
+SpanElement minClass = document.querySelector(".class-size-minimum");
+SpanElement maxClass = document.querySelector(".class-size-maximum");
 int currentItemCount = 5;
 int categoryIDCounter = 0;
 
 main() {
   initialize(fetchCachedCategories());
+  updateClassSizeDisplay();
   ButtonElement addCategoryButton = document.querySelector(".add-category");
-  addCategoryButton.onClick.listen((e) => addCategory());
+  addCategoryButton.onClick.listen((e) {
+    addCategory();
+    updateClassSizeDisplay();
+  });
   ButtonElement resetButton = document.querySelector(".reset");
   resetButton.onClick.listen((e) {
     if (window.confirm("本当にリセットしますか？保存されていたのも削除されますよ。")) {
@@ -120,7 +126,7 @@ void addCategory() {
   StringBuffer html = new StringBuffer('''<li id="category-$categoryIDCounter">
       <div class="category">
       <div class="category-description">
-        <label class="fragment">文型（{アイテムは{}に入る）
+        <label class="fragment">I/Myで始まる文型（アイテムは{}に入る）
         <input type="text"></label>
         <label class="question">質問の仕方
         <input type="text"></label>
@@ -158,7 +164,7 @@ void addCategoryFromMap(Map categoryMap) {
   StringBuffer html = new StringBuffer('''<li id="category-$categoryIDCounter">
       <div class="category" >
       <div class="category-description">
-        <label class="fragment">文型（{アイテムは{}に入る）
+        <label class="fragment">I/Myで始まる文型（アイテムは{}に入る）
         <input type="text" value="$fragment"></label>
         <label class="question">質問の仕方
         <input type="text" value="${categoryMap["question"]}"></label>
@@ -188,6 +194,7 @@ List<UListElement> itemLists() => document.querySelectorAll(".items");
 void increaseItems() {
   currentItemCount++;
   itemLists().forEach((list) => list.append(itemInput()));
+  updateClassSizeDisplay();
 }
 
 void decreaseItems() {
@@ -195,14 +202,21 @@ void decreaseItems() {
   currentItemCount--;
   itemLists().forEach((list) => list.children.removeLast());
   }
+  updateClassSizeDisplay();
 }
+
+void updateClassSizeDisplay() {
+  int minimum = currentItemCount * categories.children.length;
+  int maximum = minimum + 5;
+  minClass.innerHtml = minimum.toString();
+  maxClass.innerHtml = maximum.toString();
+}
+
 
 void initialize([List<Map> cachedCategories]) {
   categories.children.clear();
   if (cachedCategories != null) {
-    print("Cached categories were found!");
-    print(cachedCategories.toString());
-    int currentItemCount = cachedCategories.map((category) => category["items"].length).reduce(max);
+    currentItemCount = cachedCategories.map((category) => category["items"].length).reduce(max);
     cachedCategories.forEach((cachedCategory) => addCategoryFromMap(cachedCategory));
   } else {
     currentItemCount = 5;
@@ -212,4 +226,5 @@ void initialize([List<Map> cachedCategories]) {
     addCategory();
     addCategory();
   }
+  updateClassSizeDisplay();
 }

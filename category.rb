@@ -29,6 +29,10 @@ And hence:
 
 people_to_find = number_of_categories
 
+So:
+
+items_per_category * number_of_categories <= total_people.
+
 So, 1 category, with 5 items in that category, implies 5 total people and 1 person to find.
 2 categories, with 5 items in each, implies 10 total people and 2 people to find.
 
