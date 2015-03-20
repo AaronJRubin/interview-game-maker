@@ -20,7 +20,7 @@ class Category
 
 	require 'set'
 
-	GAP = "{{}}"
+	GAP = "{}"
 
 	NAMES = ["Edward", "Emma", "Ellie", "Emmett", "Evan", 
 	"Alex", "Alexis", "Andrew", "Amelia", "Amanda",

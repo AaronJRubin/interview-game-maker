@@ -6,13 +6,16 @@
 @import "compass/reset";
 @import "compass/css3/flexbox";
 
+$color: #e8e8e8;
+$main-width: 850px;
+
 body {
 	background-color: #333333;
-	color: #e8e8e8;;
+	color: $color;
 }
 
 main {
-	max-width: 850px;
+	max-width: $main-width;
 	margin: auto;
 }
 
@@ -21,6 +24,27 @@ main {
 		margin: 1em 0;
 		border: 1px solid;
 		padding: 0.5em;
+		position: relative;
+		> div > div {
+			margin: 0.3em 0;
+		}
+	}
+}
+
+.category-description {
+	@include display-flex(flex);
+	@include flex-direction(row);
+	@include justify-content(space-between);
+	@include align-items(center);
+	text-align: center;
+	label {
+		width: 30%;
+		input[type="text"] {
+		margin-top: 0.2em;
+		display: block;
+		width: 100%;
+	}
+
 	}
 }
 
@@ -29,7 +53,7 @@ main {
 	@include flex-direction(row);
 	@include align-content(stretch);
 	width: 100%;
-	margin: 1em 0;
+	margin: 0.3em 0;
 	li {
 		@include flex(1);
 		text-align: center;
@@ -37,4 +61,50 @@ main {
 			width: 95%;
 		}
 	}
+}
+
+button {
+	border: none;
+	border-radius: 10px;
+	font-size: 1.2em;
+	color: inherit;
+	&:hover {
+		background-color: purple;
+	}
+	&:disabled {
+		background-color: green;
+	}
+}
+
+.save {
+	display: block;
+	width: 100%;
+	background-color: blue;
+	
+	margin: 0.5em 0;
+}
+
+.edit-buttons {
+	@include display-flex(flex);
+	@include flex-direction(row);
+	@include justify-content(space-between);
+	button {
+		width: 32%;
+	}
+	margin: 0.5em 0;
+}
+
+.global-buttons {
+	@include display-flex(flex);
+	@include flex-direction(row);
+	@include justify-content(space-between);
+	button {
+		width: 48%;
+	}
+	margin: 0.5em 0;
+}
+
+.delete-button {
+	position: relative;
+	left: $main-width - 70;
 }
