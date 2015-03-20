@@ -120,47 +120,71 @@ main {
   display: flex;
   -webkit-flex-direction: row;
   flex-direction: row;
-  -webkit-align-content: stretch;
-  align-content: stretch;
   width: 100%;
   margin: 0.3em 0;
 }
-/* line 57, ../sass/main.scss */
+/* line 56, ../sass/main.scss */
 .items li {
   -webkit-flex: 1;
   flex: 1;
   text-align: center;
 }
-/* line 60, ../sass/main.scss */
+/* line 59, ../sass/main.scss */
 .items li input {
   width: 95%;
 }
 
-/* line 66, ../sass/main.scss */
+/* line 65, ../sass/main.scss */
+.downloads {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+/* line 69, ../sass/main.scss */
+.downloads a {
+  display: block;
+  padding: 1em 0;
+  background-color: blue;
+  width: 48%;
+  font-size: 1.2em;
+  color: inherit;
+  text-align: center;
+  border-radius: 10px;
+  text-decoration: none;
+}
+/* line 79, ../sass/main.scss */
+.downloads a:hover {
+  background-color: purple;
+}
+
+/* line 85, ../sass/main.scss */
 button {
   border: none;
   border-radius: 10px;
   font-size: 1.2em;
   color: inherit;
+  background-color: blue;
 }
-/* line 71, ../sass/main.scss */
+/* line 91, ../sass/main.scss */
 button:hover {
   background-color: purple;
 }
-/* line 74, ../sass/main.scss */
+/* line 94, ../sass/main.scss */
 button:disabled {
-  background-color: green;
+  background-color: grey;
 }
 
-/* line 79, ../sass/main.scss */
+/* line 99, ../sass/main.scss */
 .save {
   display: block;
   width: 100%;
-  background-color: blue;
   margin: 0.5em 0;
 }
 
-/* line 87, ../sass/main.scss */
+/* line 105, ../sass/main.scss */
 .edit-buttons {
   display: -webkit-flex;
   display: flex;
@@ -170,12 +194,12 @@ button:disabled {
   justify-content: space-between;
   margin: 0.5em 0;
 }
-/* line 91, ../sass/main.scss */
+/* line 109, ../sass/main.scss */
 .edit-buttons button {
   width: 32%;
 }
 
-/* line 97, ../sass/main.scss */
+/* line 115, ../sass/main.scss */
 .global-buttons {
   display: -webkit-flex;
   display: flex;
@@ -185,12 +209,12 @@ button:disabled {
   justify-content: space-between;
   margin: 0.5em 0;
 }
-/* line 101, ../sass/main.scss */
+/* line 119, ../sass/main.scss */
 .global-buttons button {
   width: 48%;
 }
 
-/* line 107, ../sass/main.scss */
+/* line 125, ../sass/main.scss */
 .delete-button {
   position: relative;
   left: 780px;

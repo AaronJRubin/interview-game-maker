@@ -1,3 +1,5 @@
+require 'humanize'
+
 =begin
 Keep in mind the following equations:
 
@@ -11,9 +13,25 @@ items_per_category * people_to_find = total_people
 
 Strictly speaking, for the purposes of game enjoyment,
 the left hand of the equals sign only sets a LOWER BOUND on total_people,
-i.e., items_per_count * people_to_find <= total_people.
+i.e., items_per_category * people_to_find <= total_people.
 This is because having a few extra people doesn't actually mess up the game,
 it just makes a few lucky students have somewhat easier tasks.
+
+Also note the following equation:
+
+items_per_category * number_of_categories = total_tasks
+
+If we want total_tasks to equal total_people:
+
+items_per_category * people_to_find = items_per_category * number_of_categories
+
+And hence:
+
+people_to_find = number_of_categories
+
+So, 1 category, with 5 items in that category, implies 5 total people and 1 person to find.
+2 categories, with 5 items in each, implies 10 total people and 2 people to find.
+
 =end
 
 class Category
@@ -54,7 +72,7 @@ class Category
 	end
 
 	def generate_task(item, people_to_find)
-		"#{people_to_find} people#{@possessive ? "'s" : ""} #{generate_fragment(item)}. Find those people."
+		"#{people_to_find.humanize.capitalize} people#{@possessive ? "'s" : ""} #{generate_fragment(item)}. Find those people."
 	end
 
 	def generate_description(item)

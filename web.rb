@@ -5,13 +5,12 @@ require 'base64'
 require './category'
 
 post '/' do
-	puts "Received a post request!"
 	data = JSON.parse request.body.read
 	categories_json = data["categories"]
 	categories = categories_json.map do |category_json|
 		Category.new(category_json["fragment"], category_json["question"], category_json["items"], category_json["possessive"])
 	end
-	people_to_find = data["people_to_find"].to_i
+	people_to_find = categories.count
 	description_latex = Category.descriptions_from_categories(categories, people_to_find)
 	tasks_latex = Category.tasks_from_categories(categories, people_to_find)
 	description_file = Tempfile.new('descriptions')
@@ -28,7 +27,5 @@ post '/' do
 	tasks_64 = Base64.encode64(IO.binread(tasks_pdf))
 	`rm #{description_pdf.pathmap("%n.*")}`
 	`rm #{tasks_pdf.pathmap("%n.*")}`
-	res = {"descriptions" => description_64, "tasks" => tasks_64}.to_json
-	puts res[0..20]
-	res
+	{"descriptions" => description_64, "tasks" => tasks_64}.to_json
 end

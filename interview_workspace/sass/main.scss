@@ -51,7 +51,6 @@ main {
 .items {
 	@include display-flex(flex);
 	@include flex-direction(row);
-	@include align-content(stretch);
 	width: 100%;
 	margin: 0.3em 0;
 	li {
@@ -63,24 +62,43 @@ main {
 	}
 }
 
+.downloads {
+	@include display-flex(flex);
+	@include flex-direction(row);
+	@include justify-content(space-between);
+	a {
+		display: block;
+		padding: 1em 0;
+		background-color: blue;
+		width: 48%;
+		font-size: 1.2em;
+		color: inherit;
+		text-align: center;
+		border-radius: 10px;
+		text-decoration: none;
+		&:hover {
+		background-color: purple;
+	}
+	}
+}
+
 button {
 	border: none;
 	border-radius: 10px;
 	font-size: 1.2em;
 	color: inherit;
+	background-color: blue;
 	&:hover {
 		background-color: purple;
 	}
 	&:disabled {
-		background-color: green;
+		background-color: grey;
 	}
 }
 
 .save {
 	display: block;
 	width: 100%;
-	background-color: blue;
-	
 	margin: 0.5em 0;
 }
 

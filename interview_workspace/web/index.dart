@@ -5,7 +5,6 @@ import 'dart:async';
 import 'package:cryptoutils/cryptoutils.dart';
 
 UListElement categories = document.querySelector(".categories");
-NumberInputElement peopleToFind = document.querySelector(".people-to-find");
 DivElement downloads = document.querySelector(".downloads");
 int currentItemCount = 5;
 int categoryIDCounter = 0;
@@ -33,23 +32,24 @@ main() {
   createButton.onClick.listen((e) {
     List<Map> categories = getCategories();
     if (!validateCategories(categories)) {
-       window.alert("空っぽのアイテムがありますから作れません");
+       window.alert("空っぽのアイテムがあります。なので、作れません");
        return;
     }
     createButton.disabled = true;
+    resetButton.disabled = true;
     createButton.text = "作成中";
-    Map params = {"categories" : categories, "people_to_find" : peopleToFind.valueAsNumber};
+    Map params = {"categories" : categories};
     HttpRequest.request("/", method: "post", sendData: JSON.encode(params)).then
     ((HttpRequest resp) {
       createButton.disabled = false;
+      resetButton.disabled = false;
       createButton.text = "作成する";
       Map mapResponse = JSON.decode(resp.responseText);
       String descriptions = mapResponse["descriptions"];
       String tasks = mapResponse["tasks"];
-      List<int> descriptionBytes = CryptoUtils.base64StringToBytes(descriptions);
-      List<int> tasksBytes = CryptoUtils.base64StringToBytes(tasks);
-      downloads.append(pdfDownloadLink("description.pdf", descriptionBytes));
-      downloads.append(pdfDownloadLink("tasks.pdf", tasksBytes));
+      downloads.children.clear();
+      downloads.append(pdfDownloadLink("個人情報.pdf", descriptions));
+      downloads.append(pdfDownloadLink("目的.pdf", tasks));
     });
   });
   ButtonElement saveButton = document.querySelector(".save");
@@ -57,18 +57,19 @@ main() {
     cacheCategories(getCategories());
     saveButton.disabled = true;
     saveButton.text = "保存しました";
-    new Timer(new Duration(seconds: 5), () {
+    new Timer(new Duration(seconds: 2), () {
       saveButton.disabled = false;
       saveButton.text = "保存する";
     });
   });
 }
 
-AnchorElement pdfDownloadLink(String filename, List<int> bytes) {
+AnchorElement pdfDownloadLink(String filename, String base64) {
   AnchorElement res = new AnchorElement();
+  List<int> bytes = CryptoUtils.base64StringToBytes(base64);
   res.setAttribute("download", filename);
   res.setAttribute("href", Url.createObjectUrlFromBlob(new Blob([bytes], "application/pdf")));
-  res.setInnerHtml(filename);
+  res.setInnerHtml(filename + "をダウンロード");
   return res;
 }
 
@@ -97,15 +98,6 @@ List<Map> getCategories() {
 
 bool validateCategories(List<Map> categoryMaps) {
   return categoryMaps.every((categoryMap) => categoryMap["items"].length == currentItemCount);
-}
-
-void create() {
-  List<Map> categoryMaps = getCategories();
-  if (!validateCategories(categoryMaps)) {
-    window.alert("空っぽのアイテムがありますから作れません");
-  } else {
-    print(categoryMaps.toString());
-  }
 }
 
 void cacheCategories(List<Map> categoryMaps) {

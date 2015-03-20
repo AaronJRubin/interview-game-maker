@@ -6,3 +6,7 @@ task :compile do
 	sh 'rm -r public/'
 	sh 'cp -r interview_workspace/build/web public/'
 end
+
+task :copy_css do
+	sh 'cp interview_workspace/web/main.css public/main.css'
+end
