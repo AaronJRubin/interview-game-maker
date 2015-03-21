@@ -91,59 +91,49 @@ main {
   margin: 0.3em 0;
 }
 
-/* line 34, ../sass/main.scss */
-.category-description {
+/* line 36, ../sass/main.scss */
+.flex, .category-description, .items {
   display: -webkit-flex;
   display: flex;
   -webkit-flex-direction: row;
   flex-direction: row;
   -webkit-justify-content: space-between;
   justify-content: space-between;
-  -webkit-align-items: center;
-  align-items: center;
+}
+
+/* line 42, ../sass/main.scss */
+.category-description {
   text-align: center;
 }
-/* line 40, ../sass/main.scss */
+/* line 45, ../sass/main.scss */
 .category-description label {
   width: 40%;
 }
-/* line 42, ../sass/main.scss */
+/* line 47, ../sass/main.scss */
 .category-description label input[type="text"] {
   margin-top: 0.2em;
   display: block;
   width: 100%;
 }
 
-/* line 51, ../sass/main.scss */
+/* line 55, ../sass/main.scss */
 .items {
-  display: -webkit-flex;
-  display: flex;
-  -webkit-flex-direction: row;
-  flex-direction: row;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
   width: 100%;
   margin: 0.3em 0;
 }
-/* line 56, ../sass/main.scss */
+/* line 60, ../sass/main.scss */
 .items li {
-  -webkit-flex: 1;
-  flex: 1;
+  width: 19%;
   text-align: center;
 }
-/* line 59, ../sass/main.scss */
+/* line 63, ../sass/main.scss */
 .items li input {
   width: 95%;
 }
 
-/* line 65, ../sass/main.scss */
-.downloads {
-  display: -webkit-flex;
-  display: flex;
-  -webkit-flex-direction: row;
-  flex-direction: row;
-  -webkit-justify-content: space-between;
-  justify-content: space-between;
-}
-/* line 69, ../sass/main.scss */
+/* line 71, ../sass/main.scss */
 .downloads a {
   display: block;
   padding: 1em 0;
@@ -155,12 +145,12 @@ main {
   border-radius: 10px;
   text-decoration: none;
 }
-/* line 79, ../sass/main.scss */
+/* line 81, ../sass/main.scss */
 .downloads a:hover {
   background-color: purple;
 }
 
-/* line 85, ../sass/main.scss */
+/* line 87, ../sass/main.scss */
 button {
   border: none;
   border-radius: 10px;
@@ -168,53 +158,41 @@ button {
   color: inherit;
   background-color: blue;
 }
-/* line 91, ../sass/main.scss */
+/* line 93, ../sass/main.scss */
 button:hover {
   background-color: purple;
 }
-/* line 94, ../sass/main.scss */
+/* line 96, ../sass/main.scss */
 button:disabled {
   background-color: grey;
 }
 
-/* line 99, ../sass/main.scss */
+/* line 101, ../sass/main.scss */
 .save {
   display: block;
   width: 100%;
   margin: 0.5em 0;
 }
 
-/* line 105, ../sass/main.scss */
+/* line 107, ../sass/main.scss */
 .edit-buttons {
-  display: -webkit-flex;
-  display: flex;
-  -webkit-flex-direction: row;
-  flex-direction: row;
-  -webkit-justify-content: space-between;
-  justify-content: space-between;
   margin: 0.5em 0;
 }
-/* line 109, ../sass/main.scss */
+/* line 108, ../sass/main.scss */
 .edit-buttons button {
   width: 32%;
 }
 
-/* line 115, ../sass/main.scss */
+/* line 114, ../sass/main.scss */
 .global-buttons {
-  display: -webkit-flex;
-  display: flex;
-  -webkit-flex-direction: row;
-  flex-direction: row;
-  -webkit-justify-content: space-between;
-  justify-content: space-between;
   margin: 0.5em 0;
 }
-/* line 119, ../sass/main.scss */
+/* line 115, ../sass/main.scss */
 .global-buttons button {
   width: 48%;
 }
 
-/* line 125, ../sass/main.scss */
+/* line 121, ../sass/main.scss */
 .delete-button {
   position: relative;
   left: 780px;

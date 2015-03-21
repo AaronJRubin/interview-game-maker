@@ -184,8 +184,8 @@ void addCategoryFromMap(Map categoryMap) {
  categoryIDCounter++;
 }
 
-UListElement itemInput() {
-  return new UListElement()..
+Element itemInput() {
+  return new Element.li()..
       append(new InputElement(type: "text")..classes.add("item"));
 }
 

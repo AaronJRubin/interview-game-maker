@@ -31,11 +31,16 @@ main {
 	}
 }
 
-.category-description {
+
+
+.flex {
 	@include display-flex(flex);
 	@include flex-direction(row);
 	@include justify-content(space-between);
-	@include align-items(center);
+}
+
+.category-description {
+	@extend .flex;
 	text-align: center;
 	label {
 		width: 40%;
@@ -44,17 +49,16 @@ main {
 		display: block;
 		width: 100%;
 	}
-
 	}
 }
 
 .items {
-	@include display-flex(flex);
-	@include flex-direction(row);
+	@extend .flex;
+	@include flex-wrap(wrap);
 	width: 100%;
 	margin: 0.3em 0;
 	li {
-		@include flex(1);
+		width: 19%;
 		text-align: center;
 		input {
 			width: 95%;
@@ -62,10 +66,8 @@ main {
 	}
 }
 
+
 .downloads {
-	@include display-flex(flex);
-	@include flex-direction(row);
-	@include justify-content(space-between);
 	a {
 		display: block;
 		padding: 1em 0;
@@ -103,9 +105,6 @@ button {
 }
 
 .edit-buttons {
-	@include display-flex(flex);
-	@include flex-direction(row);
-	@include justify-content(space-between);
 	button {
 		width: 32%;
 	}
@@ -113,9 +112,6 @@ button {
 }
 
 .global-buttons {
-	@include display-flex(flex);
-	@include flex-direction(row);
-	@include justify-content(space-between);
 	button {
 		width: 48%;
 	}
