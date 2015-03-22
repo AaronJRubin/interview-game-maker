@@ -68,6 +68,8 @@ main {
 
 
 .downloads {
+	@extend .flex;
+	margin: 0.5em 0;
 	a {
 		display: block;
 		padding: 1em 0;
