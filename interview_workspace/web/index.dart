@@ -126,7 +126,7 @@ void addCategory() {
   StringBuffer html = new StringBuffer('''<li id="category-$categoryIDCounter">
       <div class="category">
       <div class="category-description">
-        <label class="fragment">I/Myで始まる文型（アイテムは{}に入る）
+        <label class="fragment">You/Yourで始まる文型（アイテムは{}に入る）
         <input type="text"></label>
         <label class="question">質問の仕方
         <input type="text"></label>
@@ -164,7 +164,7 @@ void addCategoryFromMap(Map categoryMap) {
   StringBuffer html = new StringBuffer('''<li id="category-$categoryIDCounter">
       <div class="category" >
       <div class="category-description">
-        <label class="fragment">I/Myで始まる文型（アイテムは{}に入る）
+        <label class="fragment">You/Yourで始まる文型（アイテムは{}に入る）
         <input type="text" value="$fragment"></label>
         <label class="question">質問の仕方
         <input type="text" value="${categoryMap["question"]}"></label>
