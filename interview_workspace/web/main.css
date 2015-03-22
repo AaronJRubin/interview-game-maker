@@ -107,7 +107,7 @@ main {
 }
 /* line 45, ../sass/main.scss */
 .category-description label {
-  width: 40%;
+  width: 45%;
 }
 /* line 47, ../sass/main.scss */
 .category-description label input[type="text"] {
@@ -125,7 +125,8 @@ main {
 }
 /* line 60, ../sass/main.scss */
 .items li {
-  width: 19%;
+  -webkit-flex: 1;
+  flex: 1;
   text-align: center;
 }
 /* line 63, ../sass/main.scss */
