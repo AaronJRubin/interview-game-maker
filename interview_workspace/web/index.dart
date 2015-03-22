@@ -88,11 +88,11 @@ Map readCategory(DivElement categoryElement) {
   DivElement categoryDescription = categoryElement.children.first;
   TextInputElement fragmentElement = childWithClass(categoryDescription, "fragment").children.first;
   String fragment = fragmentElement.value;
-  bool possessive = fragment.startsWith("My");
+  bool possessive = fragment.startsWith("Your");
   if (possessive) {
-    fragment = fragment.replaceFirst("My ", "");
+    fragment = fragment.replaceFirst("Your ", "");
   } else {
-    fragment = fragment.replaceFirst("I ", "");
+    fragment = fragment.replaceFirst("You ", "");
   }
   TextInputElement questionElement = childWithClass(categoryDescription, "question").children.first;
   String question = questionElement.value;
@@ -153,13 +153,14 @@ void createDeleteAction(int categoryID) {
       String toDelete = deleteButton.id.split("-")[1];
       return element.id == "category-$toDelete";
     });
+    updateClassSizeDisplay();
     };
   });
 }
 
 void addCategoryFromMap(Map categoryMap) {
   List<String> items = categoryMap["items"];
-  String pronoun = categoryMap["possessive"] ? "My " : "I ";
+  String pronoun = categoryMap["possessive"] ? "Your " : "You ";
   String fragment =  pronoun + categoryMap["fragment"];
   StringBuffer html = new StringBuffer('''<li id="category-$categoryIDCounter">
       <div class="category" >

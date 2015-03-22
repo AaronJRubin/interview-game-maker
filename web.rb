@@ -4,6 +4,10 @@ require 'rake'
 require 'base64'
 require './category'
 
+get '/' do
+	send_file 'public/index.html'
+end
+
 post '/' do
 	data = JSON.parse request.body.read
 	categories_json = data["categories"]
