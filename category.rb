@@ -132,6 +132,32 @@ class Category
 				end
 			end
 		end
+		extra_count = 0
+		document << "{\\bfseries "
+		# We need to refactor this, it's not DRY at all
+		while extra_count < 5 do
+			descriptions.each do |description|
+				description.shuffle!
+			end
+			(0...item_count).each do |item_number|
+				document << "Your name is #{shuffled_names[name_index]}\\\\"
+				name_index = (name_index + 1) % shuffled_names.count
+				descriptions.each do |description|
+					document << description[item_number] + '\\\\'
+				end
+				extra_count += 1
+				if extra_count > 5
+					break
+				end
+				document << "\n\n"
+				people_on_page += 1
+				if people_on_page >= people_per_page
+					document << "\\pagebreak\n"
+					people_on_page = 0
+				end
+			end
+		end
+		document << "}\n" # end bfseries
 		document << "\\end{document}"
 		return document
 	end
@@ -149,6 +175,19 @@ class Category
 				document << category.hint + "\\\\\n\n"
 			end
 		end
+		all_tasks = categories.each.map do |category|
+			category.tasks(people_to_find).each.map do |task|
+				"#{task}\\\\#{category.hint}\\\\\n\n"
+			end
+		end . flatten
+		all_tasks.shuffle!
+		extra_task = 0
+		document << "{\\bfseries "
+		while extra_task < 5
+			document << all_tasks[extra_task % all_tasks.count]
+			extra_task += 1
+		end
+		document << "}\n" # end bfseries
 		document << "\\end{document}"
 	end
 end
