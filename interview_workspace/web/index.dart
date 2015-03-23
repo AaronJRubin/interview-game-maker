@@ -2,7 +2,7 @@ import 'dart:html';
 import 'dart:convert';
 import 'dart:math';
 import 'dart:async';
-import 'package:cryptoutils/cryptoutils.dart';
+import 'package:interview_workspace/cryptoutils.dart';
 
 UListElement categories = document.querySelector(".categories");
 DivElement downloads = document.querySelector(".downloads");
