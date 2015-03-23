@@ -76,6 +76,7 @@ AnchorElement pdfDownloadLink(String filename, String base64) {
   res.setAttribute("download", filename);
   res.setAttribute("href", Url.createObjectUrlFromBlob(new Blob([bytes], "application/pdf")));
   res.setInnerHtml(filename + "をダウンロード");
+  res.onClick.listen((t) => res.classes.add("clicked"));
   return res;
 }
 

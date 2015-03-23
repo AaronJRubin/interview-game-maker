@@ -86,11 +86,8 @@ main {
 		text-align: center;
 		border-radius: 10px;
 		text-decoration: none;
-		&:hover {
+		&:hover, &.clicked {
 		background-color: purple;
-		}
-		&:visited {
-			background-color: grey;
 		}
 	}
 }
