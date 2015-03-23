@@ -102,7 +102,7 @@ class Category
 		end
 	end
 
-	def self.descriptions_from_categories(categories, people_to_find = 5)
+	def self.latex_descriptions_from_categories(categories, people_to_find = 5)
 		validate_category_counts(categories)
 		item_count = categories.first.item_count
 		document = PdfBuilder.new(two_columns: true)
@@ -149,7 +149,7 @@ class Category
 		return document.latexDocument
 	end
 
-	def self.tasks_from_categories(categories, people_to_find = 5)
+	def self.latex_tasks_from_categories(categories, people_to_find = 5)
 		validate_category_counts(categories)
 		document = PdfBuilder.new(two_columns: false)
 		categories.each do |category|

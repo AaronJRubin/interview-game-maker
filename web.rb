@@ -22,8 +22,8 @@ post '/' do
 		Category.new(category_json["fragment"], category_json["question"], category_json["items"], category_json["possessive"])
 	end
 	people_to_find = categories.count
-	description_latex = Category.descriptions_from_categories(categories, people_to_find)
-	tasks_latex = Category.tasks_from_categories(categories, people_to_find)
+	description_latex = Category.latex_descriptions_from_categories(categories, people_to_find)
+	tasks_latex = Category.latex_tasks_from_categories(categories, people_to_find)
 	description_64 = PdfBuilder.base64PDF(description_latex)
 	tasks_64 = PdfBuilder.base64PDF(tasks_latex)
 	{"descriptions" => description_64, "tasks" => tasks_64}.to_json
