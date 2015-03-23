@@ -14,6 +14,28 @@ main {
 	margin: auto;
 }
 
+h1 {
+	font-size: 3em;
+	text-align: center;
+	margin: 1em 0;
+}
+
+p {
+	line-height: 1.3em;
+	margin-bottom: 0.5em; 
+}
+
+blockquote {
+	width: 80%;
+	margin: 1em auto;
+	text-align: center;
+	p {
+		display: inline-block;
+		margin: auto;
+		text-align: left;
+	}
+}
+
 .categories {
 	> li {
 		margin: 1em 0;
