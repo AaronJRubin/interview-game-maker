@@ -26,4 +26,4 @@ def write(path, string):
 introduction = render_str("base/introduction.html")
 write(os.path.join(dest, "introduction.html"), introduction.encode('utf8'))
 index = render_str("base/make-game.html");
-write(os.path.join(dest, "index.html"), index.encode('utf8'))
+write(os.path.join(dest, "make-game.html"), index.encode('utf8'))

@@ -11,7 +11,7 @@ task :generate do
 	Dir.chdir '..'
 end
 
-task :compile do
+task :compile => [:generate] do
 	Dir.chdir 'interview_workspace'
 	sh 'pub build'
 	Dir.chdir '..'

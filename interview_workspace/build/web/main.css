@@ -1,7 +1,3 @@
-/* Welcome to Compass.
- * In this file you should write your main styles. (or centralize your imports)
- * Import this file using the following HTML or equivalent:
- * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 /* line 5, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -67,31 +63,57 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   display: block;
 }
 
-/* line 12, ../sass/main.scss */
+/* line 7, ../sass/main.scss */
 body {
   background-color: #333333;
   color: #e8e8e8;
 }
 
-/* line 17, ../sass/main.scss */
+/* line 12, ../sass/main.scss */
 main {
   max-width: 850px;
   margin: auto;
 }
 
+/* line 17, ../sass/main.scss */
+h1 {
+  font-size: 3em;
+  text-align: center;
+  margin: 1em 0;
+}
+
 /* line 23, ../sass/main.scss */
+p {
+  line-height: 1.3em;
+  margin-bottom: 0.5em;
+}
+
+/* line 28, ../sass/main.scss */
+blockquote {
+  width: 80%;
+  margin: 1em auto;
+  text-align: center;
+}
+/* line 32, ../sass/main.scss */
+blockquote p {
+  display: inline-block;
+  margin: auto;
+  text-align: left;
+}
+
+/* line 40, ../sass/main.scss */
 .categories > li {
   margin: 1em 0;
   border: 1px solid;
   padding: 0.5em;
   position: relative;
 }
-/* line 28, ../sass/main.scss */
+/* line 45, ../sass/main.scss */
 .categories > li > div > div {
   margin: 0.3em 0;
 }
 
-/* line 36, ../sass/main.scss */
+/* line 51, ../sass/main.scss */
 .flex, .category-description, .items {
   display: -webkit-flex;
   display: flex;
@@ -101,111 +123,103 @@ main {
   justify-content: space-between;
 }
 
-/* line 42, ../sass/main.scss */
+/* line 57, ../sass/main.scss */
 .category-description {
   text-align: center;
 }
-/* line 45, ../sass/main.scss */
+/* line 60, ../sass/main.scss */
 .category-description label {
   width: 45%;
 }
-/* line 47, ../sass/main.scss */
+/* line 62, ../sass/main.scss */
 .category-description label input[type="text"] {
   margin-top: 0.2em;
   display: block;
   width: 100%;
 }
 
-/* line 55, ../sass/main.scss */
+/* line 70, ../sass/main.scss */
 .class-size-minimum {
   color: green;
 }
 
-/* line 59, ../sass/main.scss */
+/* line 74, ../sass/main.scss */
 .class-size-maximum {
   color: red;
 }
 
-/* line 63, ../sass/main.scss */
+/* line 78, ../sass/main.scss */
 .items {
   width: 100%;
   margin: 0.3em 0;
 }
-/* line 67, ../sass/main.scss */
+/* line 82, ../sass/main.scss */
 .items li {
   -webkit-flex: 1;
   flex: 1;
   text-align: center;
 }
-/* line 70, ../sass/main.scss */
+/* line 85, ../sass/main.scss */
 .items li input {
   width: 95%;
 }
 
-/* line 77, ../sass/main.scss */
-.downloads {
+/* line 91, ../sass/main.scss */
+.button-bar {
   margin: 0.5em 0;
-}
-/* line 79, ../sass/main.scss */
-.downloads a {
-  display: block;
-  padding: 1em 0;
-  background-color: blue;
-  width: 48%;
-  font-size: 1.2em;
-  color: inherit;
-  text-align: center;
-  border-radius: 10px;
-  text-decoration: none;
-}
-/* line 89, ../sass/main.scss */
-.downloads a:hover, .downloads a.clicked {
-  background-color: purple;
 }
 
 /* line 95, ../sass/main.scss */
-button {
-  border: none;
+button, .downloads a {
   border-radius: 10px;
   font-size: 1.2em;
   color: inherit;
   background-color: blue;
 }
-/* line 101, ../sass/main.scss */
-button:hover {
+/* line 100, ../sass/main.scss */
+button:hover, .downloads a:hover {
   background-color: purple;
 }
-/* line 104, ../sass/main.scss */
+
+/* line 106, ../sass/main.scss */
+.downloads a {
+  display: block;
+  padding: 1em 0;
+  width: 48%;
+  text-align: center;
+  text-decoration: none;
+}
+/* line 112, ../sass/main.scss */
+.downloads a.clicked {
+  background-color: purple;
+}
+
+/* line 118, ../sass/main.scss */
+button {
+  border: none;
+}
+/* line 120, ../sass/main.scss */
 button:disabled {
   background-color: grey;
 }
 
-/* line 109, ../sass/main.scss */
+/* line 125, ../sass/main.scss */
 .save {
   display: block;
   width: 100%;
-  margin: 0.5em 0;
 }
 
-/* line 115, ../sass/main.scss */
-.edit-buttons {
-  margin: 0.5em 0;
-}
-/* line 116, ../sass/main.scss */
+/* line 131, ../sass/main.scss */
 .edit-buttons button {
   width: 32%;
 }
 
-/* line 122, ../sass/main.scss */
-.global-buttons {
-  margin: 0.5em 0;
-}
-/* line 123, ../sass/main.scss */
+/* line 137, ../sass/main.scss */
 .global-buttons button {
   width: 48%;
 }
 
-/* line 129, ../sass/main.scss */
+/* line 142, ../sass/main.scss */
 .delete-button {
   position: relative;
   left: calc(100% - 50px);
