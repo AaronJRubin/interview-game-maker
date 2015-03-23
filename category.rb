@@ -52,14 +52,7 @@ class Category
 	"Max", "Mindy", "Michelle", "Michael", "Martin",
 	"Steve", "Joe", "Stephanie", "Sam", "Samantha",
 	"Simon", "Jennifer", "Jeff", "Jake", "Elliot"]
-
-	LATEX_PREAMBLE = %Q{
-		\\documentclass[10pt,letterpaper]{minimal}
-		\\setlength{\\parindent}{0pt}
-		\\twocolumn
-		\\begin{document}
-	}
-
+	
 	# A fragment is something like "{{}} on weekends", or "favorite food is {{}}"
 	def initialize(fragment, question, items, possessive = false)
 		if fragment.end_with?('.')
