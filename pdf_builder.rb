@@ -50,13 +50,13 @@ class PdfBuilder
 	end
 
 	def self.base64PDF(document)
-		file = Temfile.new
+		file = Tempfile.new("")
 		file.write(document)
 		file.close
 		`pdflatex #{file.path}`
-		pdf_file = file.path.pathma("%n.pdf")
+		pdf_file = file.path.pathmap("%n.pdf")
 		pdf_file_64 = Base64.encode64(IO.binread(pdf_file))
-		`rm #{file.pathmap("%n.*")}`
+		`rm #{file.path.pathmap("%n.*")}`
 		return pdf_file_64
 	end
 							

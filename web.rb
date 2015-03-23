@@ -3,6 +3,7 @@ require 'json'
 require 'rake'
 require 'base64'
 require './category'
+require './pdf_builder'
 
 get '/' do
 	send_file 'public/index.html'
@@ -17,19 +18,7 @@ post '/' do
 	people_to_find = categories.count
 	description_latex = Category.descriptions_from_categories(categories, people_to_find)
 	tasks_latex = Category.tasks_from_categories(categories, people_to_find)
-	description_file = Tempfile.new('descriptions')
-	description_file.write(description_latex)
-	description_file.close()
-	tasks_file = Tempfile.new('tasks')
-	tasks_file.write(tasks_latex)
-	tasks_file.close()
-	`pdflatex "#{description_file.path}"`
-	`pdflatex "#{tasks_file.path}"`
-	description_pdf = description_file.path.pathmap("%n.pdf")
-	tasks_pdf = tasks_file.path.pathmap("%n.pdf")
-	description_64 = Base64.encode64(IO.binread(description_pdf))
-	tasks_64 = Base64.encode64(IO.binread(tasks_pdf))
-	`rm #{description_pdf.pathmap("%n.*")}`
-	`rm #{tasks_pdf.pathmap("%n.*")}`
+	description_64 = PdfBuilder.base64PDF(description_latex)
+	tasks_64 = PdfBuilder.base64PDF(tasks_latex)
 	{"descriptions" => description_64, "tasks" => tasks_64}.to_json
 end
