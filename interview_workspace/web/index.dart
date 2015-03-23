@@ -207,7 +207,6 @@ void updateClassSizeDisplay() {
 void initialize([List<Map> cachedCategories]) {
   categories.children.clear();
   if (cachedCategories != null) {
-    print(cachedCategories);
     currentItemCount = cachedCategories.map((category) => category["items"].length).reduce(max);
     if (currentItemCount == 0) {
       currentItemCount = 5;

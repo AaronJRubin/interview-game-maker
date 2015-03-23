@@ -5,6 +5,8 @@ require 'base64'
 require './category'
 require './pdf_builder'
 
+use Rack::Deflater 
+
 class App < Sinatra::Application
 
 set :public_folder, 'interview_workspace/build/web'
