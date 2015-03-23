@@ -3,7 +3,7 @@ require 'rack/test'
 
 require './web.rb'
 
-class WebTest < MiniTest::Unit::TestCase
+class WebTest < MiniTest::Test
 
 	include Rack::Test::Methods
 
