@@ -1,0 +1,212 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/* line 5, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+/* line 22, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1;
+}
+
+/* line 24, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 26, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 28, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 30, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none;
+}
+/* line 103, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+/* line 32, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* line 116, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+
+/* line 12, ../sass/main.scss */
+body {
+  background-color: #333333;
+  color: #e8e8e8;
+}
+
+/* line 17, ../sass/main.scss */
+main {
+  max-width: 850px;
+  margin: auto;
+}
+
+/* line 23, ../sass/main.scss */
+.categories > li {
+  margin: 1em 0;
+  border: 1px solid;
+  padding: 0.5em;
+  position: relative;
+}
+/* line 28, ../sass/main.scss */
+.categories > li > div > div {
+  margin: 0.3em 0;
+}
+
+/* line 36, ../sass/main.scss */
+.flex, .category-description, .items {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+
+/* line 42, ../sass/main.scss */
+.category-description {
+  text-align: center;
+}
+/* line 45, ../sass/main.scss */
+.category-description label {
+  width: 45%;
+}
+/* line 47, ../sass/main.scss */
+.category-description label input[type="text"] {
+  margin-top: 0.2em;
+  display: block;
+  width: 100%;
+}
+
+/* line 55, ../sass/main.scss */
+.class-size-minimum {
+  color: green;
+}
+
+/* line 59, ../sass/main.scss */
+.class-size-maximum {
+  color: red;
+}
+
+/* line 63, ../sass/main.scss */
+.items {
+  width: 100%;
+  margin: 0.3em 0;
+}
+/* line 67, ../sass/main.scss */
+.items li {
+  -webkit-flex: 1;
+  flex: 1;
+  text-align: center;
+}
+/* line 70, ../sass/main.scss */
+.items li input {
+  width: 95%;
+}
+
+/* line 77, ../sass/main.scss */
+.downloads {
+  margin: 0.5em 0;
+}
+/* line 79, ../sass/main.scss */
+.downloads a {
+  display: block;
+  padding: 1em 0;
+  background-color: blue;
+  width: 48%;
+  font-size: 1.2em;
+  color: inherit;
+  text-align: center;
+  border-radius: 10px;
+  text-decoration: none;
+}
+/* line 89, ../sass/main.scss */
+.downloads a:hover, .downloads a.clicked {
+  background-color: purple;
+}
+
+/* line 95, ../sass/main.scss */
+button {
+  border: none;
+  border-radius: 10px;
+  font-size: 1.2em;
+  color: inherit;
+  background-color: blue;
+}
+/* line 101, ../sass/main.scss */
+button:hover {
+  background-color: purple;
+}
+/* line 104, ../sass/main.scss */
+button:disabled {
+  background-color: grey;
+}
+
+/* line 109, ../sass/main.scss */
+.save {
+  display: block;
+  width: 100%;
+  margin: 0.5em 0;
+}
+
+/* line 115, ../sass/main.scss */
+.edit-buttons {
+  margin: 0.5em 0;
+}
+/* line 116, ../sass/main.scss */
+.edit-buttons button {
+  width: 32%;
+}
+
+/* line 122, ../sass/main.scss */
+.global-buttons {
+  margin: 0.5em 0;
+}
+/* line 123, ../sass/main.scss */
+.global-buttons button {
+  width: 48%;
+}
+
+/* line 129, ../sass/main.scss */
+.delete-button {
+  position: relative;
+  left: calc(100% - 50px);
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>index</title>
+<link href="/main.css" rel="stylesheet">
+</head>
+
+<body>
+<main>
+
+
+  <button class="save">保存する</button>
+
+  <div class="global-buttons flex">
+  <button class="create">作成する</button>
+  <button class="reset">リセット</button>
+</div>
+
+  <div class="edit-buttons flex">
+  <button class="add-category">カテゴリーを追加</button>
+  <button class="increase-items">アイテムを追加</button>
+  <button class="decrease-items">アイテムを減少</button>
+  </div>
+
+<div class="downloads flex">
+</div>
+
+<div class="class-size-explanation">今の設定では最少<span class="class-size-minimum">２５</span>人でゲームが出来て、最多
+<span class="class-size-maximum">３０</span>人でゲームが出来ます。もっとたくさんの人でするには、カテゴリー、又はアイテムを増やしてください。
+</div>
+
+  <ul class="categories">
+  </ul>
+
+
+
+</main>
+  <script type="application/dart" src="index.dart"></script>
+  <!-- for this next line to work, your pubspec.yaml file must have a dependency on 'browser' -->
+  <script src="packages/browser/dart.js"></script>
+</body>
+</html>
