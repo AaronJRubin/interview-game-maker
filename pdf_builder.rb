@@ -3,24 +3,26 @@ class PdfBuilder
 	require 'base64'
 	require 'rake'
 
-	LINES_PER_PAGE = 48
+	#LINES_PER_PAGE = 48
 
-	def initialize(two_column? = "false")
+	def initialize(two_columns: false)
 		@document = "\\documentclass[10pt, letterpaper]{minimal}\n"
-		@document << "\\setlength{\parindent}{0pt}\n"
-		if two_column?
+		@document << "\\setlength{\\parindent}{0pt}\n"
+		if two_columns
 			@document << "\\twocolumn\n"
 		end
+		@document << "\\widowpenalties 1 10000\n"
+		@document << "\\raggedbottom\n"
 		@document << "\\begin{document}\n"
-		@remaining_lines = LINES_PER_PAGE
+		#@remaining_lines = LINES_PER_PAGE
 	end
 
 	def addParagraph(lines)
-		if (lines.count > @remaining_lines)
-			document << "\\pagebreak\n"
-			@remaining_lines = LINES_PER_PAGE
-		end
-		@remaining_lines -= lines.count + 1 # for blank line after paragraph
+		#if (lines.count > @remaining_lines)
+		#	@document << "\\pagebreak\n"
+			#@remaining_lines = LINES_PER_PAGE
+		#end
+		#@remaining_lines -= lines.count + 1 # for blank line after paragraph
 		lines.each do |line|
 			@document << line + "\\\\"
 		end
@@ -47,9 +49,9 @@ class PdfBuilder
 		@document.dup
 	end
 
-	def base64PDF
+	def self.base64PDF(document)
 		file = Temfile.new
-		file.write(@document)
+		file.write(document)
 		file.close
 		`pdflatex #{file.path}`
 		pdf_file = file.path.pathma("%n.pdf")

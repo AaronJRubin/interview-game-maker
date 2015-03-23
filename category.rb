@@ -1,4 +1,5 @@
 require 'humanize'
+require './pdf_builder'
 
 =begin
 Keep in mind the following equations:
@@ -108,86 +109,75 @@ class Category
 	def self.descriptions_from_categories(categories, people_to_find = 5)
 		validate_category_counts(categories)
 		item_count = categories.first.item_count
-		document = String.new(LATEX_PREAMBLE)
+		document = PdfBuilder.new(two_columns: true)
 		shuffled_names = NAMES.shuffle
 		name_index = 0
-		people_on_page = 0
-		people_per_page = 48 / (categories.count + 2)
 		descriptions = categories.map do |category| category.descriptions end
 		people_to_find.times do
 			descriptions.each do |description|
 				description.shuffle!
 			end
 			(0...item_count).each do |item_number|
-				document << "Your name is #{shuffled_names[name_index]}\\\\"
+				paragraph = []
+				paragraph << "Your name is #{shuffled_names[name_index]}"
 				name_index = (name_index + 1) % shuffled_names.count
 				descriptions.each do |description|
-					document << description[item_number] + '\\\\'
+					paragraph << description[item_number]
 				end
-				document << "\n\n"
-				people_on_page += 1
-				if people_on_page >= people_per_page
-					document << "\\pagebreak\n"
-					people_on_page = 0
-				end
+				document.addParagraph(paragraph)
 			end
 		end
 		extra_count = 0
-		document << "{\\bfseries "
+		document.startBold
 		# We need to refactor this, it's not DRY at all
 		while extra_count < 5 do
 			descriptions.each do |description|
 				description.shuffle!
 			end
 			(0...item_count).each do |item_number|
-				document << "Your name is #{shuffled_names[name_index]}\\\\"
+				paragraph = []
+				paragraph << "Your name is #{shuffled_names[name_index]}"
 				name_index = (name_index + 1) % shuffled_names.count
 				descriptions.each do |description|
-					document << description[item_number] + '\\\\'
+					paragraph << description[item_number]
 				end
+				document.addParagraph(paragraph)
 				extra_count += 1
 				if extra_count > 5
 					break
 				end
-				document << "\n\n"
-				people_on_page += 1
-				if people_on_page >= people_per_page
-					document << "\\pagebreak\n"
-					people_on_page = 0
-				end
 			end
 		end
-		document << "}\n" # end bfseries
-		document << "\\end{document}"
-		return document
+		document.endBold
+		document.endDocument
+		return document.latexDocument
 	end
 
 	def self.tasks_from_categories(categories, people_to_find = 5)
 		validate_category_counts(categories)
-		document = %Q{
-		\\documentclass[10pt,letterpaper]{minimal}
-		\\setlength{\\parindent}{0pt}
-		\\begin{document}
-		}
+		document = PdfBuilder.new(two_columns: false)
 		categories.each do |category|
 			category.tasks(people_to_find).each do |task|
-				document << task + "\\\\"
-				document << category.hint + "\\\\\n\n"
+				paragraph = []
+				paragraph << task
+				paragraph << category.hint
+				document.addParagraph(paragraph)
 			end
 		end
 		all_tasks = categories.each.map do |category|
 			category.tasks(people_to_find).each.map do |task|
-				"#{task}\\\\#{category.hint}\\\\\n\n"
+				[task, category.hint]
 			end
-		end . flatten
+		end . flatten(1)
 		all_tasks.shuffle!
 		extra_task = 0
-		document << "{\\bfseries "
+		document.startBold
 		while extra_task < 5
-			document << all_tasks[extra_task % all_tasks.count]
+			document.addParagraph(all_tasks[extra_task % all_tasks.count])
 			extra_task += 1
 		end
-		document << "}\n" # end bfseries
-		document << "\\end{document}"
+		document.endBold
+		document.endDocument
+		return document.latexDocument
 	end
 end
