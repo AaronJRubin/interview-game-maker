@@ -3,4 +3,5 @@
 .idea
 .pub/
 packages
+!build/web/packages
 pubspec.lock
