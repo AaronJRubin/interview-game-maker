@@ -122,20 +122,31 @@ List<Map> fetchCachedCategories() {
    return JSON.decode(cachedCategories);
 }
 
-void addCategory() {
-  StringBuffer html = new StringBuffer('''<li id="category-$categoryIDCounter">
-      <div class="category">
+const Map theEmptyCategory = const {"items" : const [], "fragment" : "", "question" : "", "possessive" : false };
+
+void addCategory([Map categoryMap = theEmptyCategory]) {
+   List<String> items = categoryMap["items"];
+   String pronoun = categoryMap["possessive"] ? "Your " : "You ";
+   String fragment;
+   if (categoryMap["fragment"].length > 0) {
+    fragment =  pronoun + categoryMap["fragment"];
+   } else {
+     fragment = "";
+   }
+   StringBuffer html = new StringBuffer('''<li id="category-$categoryIDCounter">
+      <div class="category" >
       <div class="category-description">
         <label class="fragment">You/Yourで始まる文型（アイテムは{}に入る）
-        <input type="text"></label>
+        <input type="text" value="$fragment"></label>
         <label class="question">質問の仕方
-        <input type="text"></label>
+        <input type="text" value="${categoryMap["question"]}"></label>
       </div>
         <div>アイテム（{}に入る英語）</div>
         <ul class="items">''');
   for (int i = 0; i < currentItemCount; i++) {
-    html.write('<li><input type="text" class="item"></li>');
-  }
+    String initialValue = i < items.length ? items[i] : "";
+    html.write('<li><input type="text" class="item" value="$initialValue"></li>');
+   }
   html.write('''</ul>
        <button class="delete-button" id="delete-$categoryIDCounter">削除</button>
       </div>
@@ -144,6 +155,7 @@ void addCategory() {
   createDeleteAction(categoryIDCounter);
   categoryIDCounter++;
 }
+
 
 void createDeleteAction(int categoryID) {
   ButtonElement deleteButton = document.querySelector("#delete-$categoryID");
@@ -156,33 +168,6 @@ void createDeleteAction(int categoryID) {
     updateClassSizeDisplay();
     };
   });
-}
-
-void addCategoryFromMap(Map categoryMap) {
-  List<String> items = categoryMap["items"];
-  String pronoun = categoryMap["possessive"] ? "Your " : "You ";
-  String fragment =  pronoun + categoryMap["fragment"];
-  StringBuffer html = new StringBuffer('''<li id="category-$categoryIDCounter">
-      <div class="category" >
-      <div class="category-description">
-        <label class="fragment">You/Yourで始まる文型（アイテムは{}に入る）
-        <input type="text" value="$fragment"></label>
-        <label class="question">質問の仕方
-        <input type="text" value="${categoryMap["question"]}"></label>
-      </div>
-        <div>アイテム（{}に入る英語）</div>
-        <ul class="items">''');
- for (int i = 0; i < currentItemCount; i++) {
-   String initialValue = i < items.length ? items[i] : "";
-   html.write('<li><input type="text" class="item" value="$initialValue"></li>');
-  }
- html.write('''</ul>
-       <button class="delete-button" id="delete-$categoryIDCounter">削除</button>
-      </div>
-    </li>''');
- categories.appendHtml(html.toString());
- createDeleteAction(categoryIDCounter);
- categoryIDCounter++;
 }
 
 Element itemInput() {
@@ -206,19 +191,27 @@ void decreaseItems() {
   updateClassSizeDisplay();
 }
 
+String makeFullWidth(String numberString) {
+  return new String.fromCharCodes(numberString.codeUnits.map((codeUnit) => codeUnit + 65248));
+}
+
 void updateClassSizeDisplay() {
   int minimum = currentItemCount * categories.children.length;
   int maximum = minimum + 5;
-  minClass.innerHtml = minimum.toString();
-  maxClass.innerHtml = maximum.toString();
+  minClass.innerHtml = makeFullWidth(minimum.toString());
+  maxClass.innerHtml = makeFullWidth(maximum.toString());
 }
 
 
 void initialize([List<Map> cachedCategories]) {
   categories.children.clear();
   if (cachedCategories != null) {
+    print(cachedCategories);
     currentItemCount = cachedCategories.map((category) => category["items"].length).reduce(max);
-    cachedCategories.forEach((cachedCategory) => addCategoryFromMap(cachedCategory));
+    if (currentItemCount == 0) {
+      currentItemCount = 5;
+    }
+    cachedCategories.forEach((cachedCategory) => addCategory(cachedCategory));
   } else {
     currentItemCount = 5;
     addCategory();

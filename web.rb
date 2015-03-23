@@ -5,10 +5,12 @@ require 'base64'
 require './category'
 require './pdf_builder'
 
-set :public_folder, '/interview_workspace/build/web'
+class App < Sinatra::Application
+
+set :public_folder, 'interview_workspace/build/web'
 
 get '/' do
-	send_file 'public/index.html'
+	send_file 'interview_workspace/build/web/index.html'
 end
 
 post '/' do
@@ -23,4 +25,6 @@ post '/' do
 	description_64 = PdfBuilder.base64PDF(description_latex)
 	tasks_64 = PdfBuilder.base64PDF(tasks_latex)
 	{"descriptions" => description_64, "tasks" => tasks_64}.to_json
+end
+
 end

@@ -4,4 +4,4 @@ require 'bundler'
 Bundler.require
 
 require './web'
-run Sinatra::Application
+run App.new

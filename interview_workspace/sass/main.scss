@@ -52,9 +52,16 @@ main {
 	}
 }
 
+.class-size-minimum {
+	color: green;
+}
+
+.class-size-maximum {
+	color: red;
+}
+
 .items {
 	@extend .flex;
-	@include flex-wrap(wrap);	
 	width: 100%;
 	margin: 0.3em 0;
 	li {
@@ -68,7 +75,6 @@ main {
 
 
 .downloads {
-	@extend .flex;
 	margin: 0.5em 0;
 	a {
 		display: block;
@@ -82,7 +88,10 @@ main {
 		text-decoration: none;
 		&:hover {
 		background-color: purple;
-	}
+		}
+		&:visited {
+			background-color: grey;
+		}
 	}
 }
 
@@ -122,5 +131,5 @@ button {
 
 .delete-button {
 	position: relative;
-	left: $main-width - 70;
+	left: calc(100% - 50px);
 }
