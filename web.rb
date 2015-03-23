@@ -5,6 +5,8 @@ require 'base64'
 require './category'
 require './pdf_builder'
 
+set :public_folder, '/interview_workspace/build/web'
+
 get '/' do
 	send_file 'public/index.html'
 end
