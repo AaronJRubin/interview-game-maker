@@ -62,6 +62,9 @@ class Category
 
 	# A fragment is something like "{{}} on weekends", or "favorite food is {{}}"
 	def initialize(fragment, question, items, possessive = false)
+		if fragment.end_with?('.')
+			fragment.chop!
+		end
 		@fragment = fragment
 		@question = question
 		@items = items
@@ -81,7 +84,7 @@ class Category
 	end
 
 	def generate_description(item)
-		"#{@possessive ? "Your" : "You"} #{generate_fragment(item)}"
+		"#{@possessive ? "Your" : "You"} #{generate_fragment(item)}."
 	end
 
 	def tasks(people_to_find)
@@ -119,7 +122,7 @@ class Category
 			end
 			(0...item_count).each do |item_number|
 				paragraph = []
-				paragraph << "Your name is #{shuffled_names[name_index]}"
+				paragraph << "Your name is #{shuffled_names[name_index]}."
 				name_index = (name_index + 1) % shuffled_names.count
 				descriptions.each do |description|
 					paragraph << description[item_number]
@@ -136,7 +139,7 @@ class Category
 			end
 			(0...item_count).each do |item_number|
 				paragraph = []
-				paragraph << "Your name is #{shuffled_names[name_index]}"
+				paragraph << "Your name is #{shuffled_names[name_index]}."
 				name_index = (name_index + 1) % shuffled_names.count
 				descriptions.each do |description|
 					paragraph << description[item_number]
