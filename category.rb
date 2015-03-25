@@ -44,14 +44,6 @@ class Category
 	require 'set'
 
 	GAP = "{}"
-
-	NAMES = ["Edward", "Emma", "Ellie", "Emmett", "Evan", 
-	"Alex", "Alexis", "Andrew", "Amelia", "Amanda",
-	"Dennis", "Denise", "Daniel", "David", "Dwight",
-	"Brian", "Bob", "Betty", "Barry", "Barney",
-	"Max", "Mindy", "Michelle", "Michael", "Martin",
-	"Steve", "Joe", "Stephanie", "Sam", "Samantha",
-	"Simon", "Jennifer", "Jeff", "Jake", "Elliot"]
 	
 	# A fragment is something like "{{}} on weekends", or "favorite food is {{}}"
 	def initialize(fragment, question, items, possessive = false)
@@ -106,17 +98,15 @@ class Category
 		validate_category_counts(categories)
 		item_count = categories.first.item_count
 		document = PdfBuilder.new(two_columns: true)
-		shuffled_names = NAMES.shuffle
-		name_index = 0
 		descriptions = categories.map do |category| category.descriptions end
+		names = NameRoulette.new
 		people_to_find.times do
 			descriptions.each do |description|
 				description.shuffle!
 			end
 			(0...item_count).each do |item_number|
 				paragraph = []
-				paragraph << "Your name is #{shuffled_names[name_index]}."
-				name_index = (name_index + 1) % shuffled_names.count
+				paragraph << "Your name is #{names.next_name}."
 				descriptions.each do |description|
 					paragraph << description[item_number]
 				end
@@ -132,8 +122,7 @@ class Category
 			end
 			(0...item_count).each do |item_number|
 				paragraph = []
-				paragraph << "Your name is #{shuffled_names[name_index]}."
-				name_index = (name_index + 1) % shuffled_names.count
+				paragraph << "Your name is #{names.next_name}."
 				descriptions.each do |description|
 					paragraph << description[item_number]
 				end
@@ -175,5 +164,26 @@ class Category
 		document.endBold
 		document.endDocument
 		return document.latexDocument
+	end
+end
+
+class NameRoulette
+
+	NAMES = ["Edward", "Emma", "Ellie", "Emmett", "Evan", 
+	"Alex", "Alexis", "Andrew", "Amelia", "Amanda",
+	"Dennis", "Denise", "Daniel", "David", "Dwight",
+	"Brian", "Bob", "Betty", "Barry", "Barney",
+	"Max", "Mindy", "Michelle", "Michael", "Martin",
+	"Steve", "Joe", "Stephanie", "Sam", "Samantha",
+	"Simon", "Jennifer", "Jeff", "Jake", "Elliot"]
+
+	def initialize
+		@names = NAMES.shuffle
+		@current_name = -1
+	end
+
+	def next_name
+		@current_name += 1
+		@names[@current_name % @names.length]
 	end
 end
