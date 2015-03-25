@@ -45,7 +45,7 @@ class Category
 
 	GAP = "{}"
 
-	# A fragment is something like "{{}} on weekends", or "favorite food is {{}}"
+	# A fragment is something like "{} on weekends", or "favorite food is {}"
 	def initialize(fragment, question, items, possessive = false)
 		if fragment.end_with?('.')
 			fragment.chop!
