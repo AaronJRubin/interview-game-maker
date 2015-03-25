@@ -44,7 +44,7 @@ class Category
 	require 'set'
 
 	GAP = "{}"
-	
+
 	# A fragment is something like "{{}} on weekends", or "favorite food is {{}}"
 	def initialize(fragment, question, items, possessive = false)
 		if fragment.end_with?('.')
@@ -90,7 +90,7 @@ class Category
 
 	def self.validate_category_counts(categories)
 		if Set.new(categories.map do |category| category.item_count end).count != 1
-			raise Exception.new("Every category must have the same amount of items!")
+		raise Exception.new("Every category must have the same amount of items!")
 		end
 	end
 
@@ -154,12 +154,12 @@ end
 class NameRoulette
 
 	NAMES = ["Edward", "Emma", "Ellie", "Emmett", "Evan", 
-	"Alex", "Alexis", "Andrew", "Amelia", "Amanda",
-	"Dennis", "Denise", "Daniel", "David", "Dwight",
-	"Brian", "Bob", "Betty", "Barry", "Barney",
-	"Max", "Mindy", "Michelle", "Michael", "Martin",
-	"Steve", "Joe", "Stephanie", "Sam", "Samantha",
-	"Simon", "Jennifer", "Jeff", "Jake", "Elliot"]
+					"Alex", "Alexis", "Andrew", "Amelia", "Amanda",
+					"Dennis", "Denise", "Daniel", "David", "Dwight",
+					"Brian", "Bob", "Betty", "Barry", "Barney",
+					"Max", "Mindy", "Michelle", "Michael", "Martin",
+					"Steve", "Joe", "Stephanie", "Sam", "Samantha",
+					"Simon", "Jennifer", "Jeff", "Jake", "Elliot"]
 
 	def initialize
 		@names = NAMES.shuffle
