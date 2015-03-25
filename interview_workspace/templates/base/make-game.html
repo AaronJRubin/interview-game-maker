@@ -1,31 +1,58 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <button class="save button-bar">保存する</button>
+<div class="dropdown-control"><span id="dropdown-label">説明を表示</span><span id="dropdown-caret" class="collapsed">&#x25BC</span></div>
+<div class="explanation-dropdown collapsed">
+<p>
+記入例：
+</p>
+<ul>
+	<li>
+	<blockquote>
+		Your favorite food is {}<br>
+		What is your favorite food?<br>
+		pizza/ramen/pasta/salad/sushi
+	</blockquote>
+	</li>
+	<li>
+	<blockquote>
+		You live in {}<br>
+		Where do you live?<br>
+		San Francisco/Boston/New York/Miami/Honolulu
+	</blockquote>
+	</li>
+</ul>
 
-  <div class="global-buttons flex button-bar">
-  <button class="create">作成する</button>
-  <button class="reset">リセット</button>
+<p>人数の計算はカテゴリー数をアイテム数でかけます。最低限の人数は理想的ですけど、違う人数のクラスで同じ活動をしたい先生が多いだろうから、作成の際、予備の個人情報カードと目的カードが５枚ずつ作成されます。その予備カードはボールドになりますから見分けが簡単なはず。使う時は、予備でないカードを必ず全部使って、
+人数に応じて適当に予備カードで補います。</p>
+<p>だいたい保存しなくても自動的に保存されますけど、もしパソコンが強制的にシャットダウンでもされたらデータが失われますので、安心の為にボタンをつくりました。</p>
+<p>記入が終わったら作成ボタンを押してください。</p>
+</div>
+<button class="save button-bar">保存する</button>
+
+<div class="global-buttons flex button-bar">
+	<button class="create">作成する</button>
+	<button class="reset">リセット</button>
 </div>
 
-  <div class="edit-buttons flex button-bar">
-  <button class="add-category">カテゴリーを追加</button>
-  <button class="increase-items">アイテムを追加</button>
-  <button class="decrease-items">アイテムを減少</button>
-  </div>
+<div class="edit-buttons flex button-bar">
+	<button class="add-category">カテゴリーを追加</button>
+	<button class="increase-items">アイテムを追加</button>
+	<button class="decrease-items">アイテムを減少</button>
+</div>
 
 <div class="downloads flex button-bar">
 </div>
 
 <div class="class-size-explanation">今の設定では最少<span class="class-size-minimum">２５</span>人でゲームが出来て、最多
-<span class="class-size-maximum">３０</span>人でゲームが出来ます。もっとたくさんの人でするには、カテゴリー、又はアイテムを増やしてください。
+	<span class="class-size-maximum">３０</span>人でゲームが出来ます。もっとたくさんの人でするには、カテゴリー、又はアイテムを増やしてください。
 </div>
 
-  <ul class="categories">
-  </ul>
+<ul class="categories">
+</ul>
 
-<script type="application/dart" src="index.dart"></script>
-  <!-- for this next line to work, your pubspec.yaml file must have a dependency on 'browser' -->
+<script type="application/dart" src="make-game.dart"></script>
+<!-- for this next line to work, your pubspec.yaml file must have a dependency on 'browser' -->
 <script src="packages/browser/dart.js"></script>
 
 {% endblock %}

@@ -63,57 +63,95 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   display: block;
 }
 
-/* line 7, ../sass/main.scss */
+/* line 14, ../sass/main.scss */
 body {
   background-color: #333333;
   color: #e8e8e8;
 }
 
-/* line 12, ../sass/main.scss */
+/* line 19, ../sass/main.scss */
 main {
   max-width: 850px;
   margin: auto;
 }
 
-/* line 17, ../sass/main.scss */
+/* line 24, ../sass/main.scss */
 h1 {
   font-size: 3em;
   text-align: center;
   margin: 1em 0;
 }
 
-/* line 23, ../sass/main.scss */
+/* line 30, ../sass/main.scss */
+header {
+  background-color: #222222;
+  margin-bottom: 1em;
+}
+/* line 33, ../sass/main.scss */
+header nav {
+  text-align: right;
+}
+/* line 35, ../sass/main.scss */
+header nav ul {
+  display: -webkit-inline-flex;
+  display: inline-flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+}
+/* line 38, ../sass/main.scss */
+header nav ul li {
+  display: inline-block;
+}
+/* line 40, ../sass/main.scss */
+header nav ul li a {
+  background-color: blue;
+  border-left: 1px solid black;
+  display: inline-block;
+  padding: 1em;
+  text-decoration: none;
+}
+/* line 42, ../sass/main.scss */
+header nav ul li a:hover {
+  background-color: purple;
+}
+
+/* line 56, ../sass/main.scss */
+a {
+  color: inherit;
+}
+
+/* line 60, ../sass/main.scss */
 p {
   line-height: 1.3em;
   margin-bottom: 0.5em;
 }
 
-/* line 28, ../sass/main.scss */
+/* line 65, ../sass/main.scss */
 blockquote {
   width: 80%;
   margin: 1em auto;
   text-align: center;
 }
-/* line 32, ../sass/main.scss */
+/* line 69, ../sass/main.scss */
 blockquote p {
   display: inline-block;
   margin: auto;
   text-align: left;
 }
 
-/* line 40, ../sass/main.scss */
+/* line 77, ../sass/main.scss */
 .categories > li {
   margin: 1em 0;
   border: 1px solid;
   padding: 0.5em;
   position: relative;
 }
-/* line 45, ../sass/main.scss */
+/* line 82, ../sass/main.scss */
 .categories > li > div > div {
   margin: 0.3em 0;
 }
 
-/* line 51, ../sass/main.scss */
+/* line 88, ../sass/main.scss */
 .flex, .category-description, .items {
   display: -webkit-flex;
   display: flex;
@@ -123,65 +161,65 @@ blockquote p {
   justify-content: space-between;
 }
 
-/* line 57, ../sass/main.scss */
+/* line 94, ../sass/main.scss */
 .category-description {
   text-align: center;
 }
-/* line 60, ../sass/main.scss */
+/* line 97, ../sass/main.scss */
 .category-description label {
   width: 45%;
 }
-/* line 62, ../sass/main.scss */
+/* line 99, ../sass/main.scss */
 .category-description label input[type="text"] {
   margin-top: 0.2em;
   display: block;
   width: 100%;
 }
 
-/* line 70, ../sass/main.scss */
+/* line 107, ../sass/main.scss */
 .class-size-minimum {
   color: green;
 }
 
-/* line 74, ../sass/main.scss */
+/* line 111, ../sass/main.scss */
 .class-size-maximum {
   color: red;
 }
 
-/* line 78, ../sass/main.scss */
+/* line 115, ../sass/main.scss */
 .items {
   width: 100%;
   margin: 0.3em 0;
 }
-/* line 82, ../sass/main.scss */
+/* line 119, ../sass/main.scss */
 .items li {
   -webkit-flex: 1;
   flex: 1;
   text-align: center;
 }
-/* line 85, ../sass/main.scss */
+/* line 122, ../sass/main.scss */
 .items li input {
   width: 95%;
 }
 
-/* line 91, ../sass/main.scss */
+/* line 128, ../sass/main.scss */
 .button-bar {
   margin: 0.5em 0;
 }
 
-/* line 95, ../sass/main.scss */
+/* line 132, ../sass/main.scss */
 button, .downloads a {
   border-radius: 10px;
   font-size: 1.2em;
   color: inherit;
   background-color: blue;
 }
-/* line 100, ../sass/main.scss */
+/* line 137, ../sass/main.scss */
 button:hover, .downloads a:hover {
   background-color: purple;
 }
 
-/* line 106, ../sass/main.scss */
+/* line 143, ../sass/main.scss */
 .downloads a {
   display: block;
   padding: 1em 0;
@@ -189,38 +227,78 @@ button:hover, .downloads a:hover {
   text-align: center;
   text-decoration: none;
 }
-/* line 112, ../sass/main.scss */
+/* line 149, ../sass/main.scss */
 .downloads a.clicked {
   background-color: purple;
 }
 
-/* line 118, ../sass/main.scss */
+/* line 155, ../sass/main.scss */
 button {
   border: none;
 }
-/* line 120, ../sass/main.scss */
+/* line 157, ../sass/main.scss */
 button:disabled {
   background-color: grey;
 }
 
-/* line 125, ../sass/main.scss */
+/* line 162, ../sass/main.scss */
 .save {
   display: block;
   width: 100%;
 }
 
-/* line 131, ../sass/main.scss */
+/* line 168, ../sass/main.scss */
 .edit-buttons button {
   width: 32%;
 }
 
-/* line 137, ../sass/main.scss */
+/* line 174, ../sass/main.scss */
 .global-buttons button {
   width: 48%;
 }
 
-/* line 142, ../sass/main.scss */
+/* line 179, ../sass/main.scss */
 .delete-button {
   position: relative;
   left: calc(100% - 50px);
+}
+
+/* line 184, ../sass/main.scss */
+.dropdown-control {
+  background-color: #222222;
+  padding: .2em .5em;
+  margin-bottom: .1em;
+  border-radius: 10px;
+}
+
+/* line 191, ../sass/main.scss */
+#dropdown-caret {
+  display: inline-block;
+  border-radius: 50%;
+  padding: .5em .4em .3em .4em;
+  margin-left: 1em;
+  background-color: blue;
+  cursor: default;
+  -webkit-touch-callout: none;
+  -moz-user-select: -moz-none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+/* line 197, ../sass/main.scss */
+#dropdown-caret:hover {
+  background-color: purple;
+}
+
+/* line 205, ../sass/main.scss */
+#dropdown-caret.collapsed {
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+/* line 209, ../sass/main.scss */
+.explanation-dropdown.collapsed {
+  display: none;
 }

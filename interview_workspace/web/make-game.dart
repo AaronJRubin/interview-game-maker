@@ -14,6 +14,20 @@ int categoryIDCounter = 0;
 main() {
   initialize(fetchCachedCategories());
   updateClassSizeDisplay();
+  List<AnchorElement> links = document.querySelectorAll("nav a");
+  window.onUnload.listen((t) => save());
+  Element dropdownCaret = document.querySelector("#dropdown-caret");
+  DivElement explanationDropdown = document.querySelector(".explanation-dropdown");
+  SpanElement dropdownLabel = document.querySelector("#dropdown-label");
+  dropdownCaret.onClick.listen((t) {
+    explanationDropdown.classes.toggle("collapsed");
+    dropdownCaret.classes.toggle("collapsed");
+    if (dropdownCaret.classes.contains("collapsed")) {
+      dropdownLabel.text = "説明を表示";
+    } else {
+      dropdownLabel.text = "説明を隠す";
+    }
+  });
   ButtonElement addCategoryButton = document.querySelector(".add-category");
   addCategoryButton.onClick.listen((e) {
     addCategory();
@@ -60,7 +74,7 @@ main() {
   });
   ButtonElement saveButton = document.querySelector(".save");
   saveButton.onClick.listen((e) {
-    cacheCategories(getCategories());
+    save();
     saveButton.disabled = true;
     saveButton.text = "保存しました";
     new Timer(new Duration(seconds: 2), () {
@@ -68,6 +82,10 @@ main() {
       saveButton.text = "保存する";
     });
   });
+}
+
+void save() {
+ cacheCategories(getCategories());
 }
 
 AnchorElement pdfDownloadLink(String filename, String base64) {
