@@ -76,7 +76,7 @@ class Category
 		@items.map do |item| generate_task(item, people_to_find) end
 	end
 
-	def descriptions
+	def description_set
 		@items.map do |item| generate_description(item) end
 	end
 
@@ -89,9 +89,7 @@ class Category
 	end
 
 	def self.validate_category_counts(categories)
-		if Set.new(categories.map do |category| category.item_count end).count != 1
-		raise Exception.new("Every category must have the same amount of items!")
-		end
+		return Set.new(categories.map do |category| category.item_count end).count == 1
 	end
 
 	def self.person_set(description_sets, name_roulette)
@@ -107,10 +105,13 @@ class Category
 		return people
 	end
 
+	INVALID_CATEGORIES_MESSAGE = "Every category must have the same number of members!"
 	def self.latex_descriptions_from_categories(categories) 
-		validate_category_counts(categories)
+		unless validate_category_counts(categories)
+			raise Exception.new(INVALID_CATEGORIES_MESSAGE)
+		end
 		document = PdfBuilder.new(two_columns: true)
-		description_sets = categories.map do |category| category.descriptions end
+		description_sets = categories.map do |category| category.description_set end
 		name_roulette = NameRoulette.new
 		people_to_find = categories.count
 		people_to_find.times do
@@ -128,7 +129,9 @@ class Category
 	end
 
 	def self.latex_tasks_from_categories(categories) 
-		validate_category_counts(categories)
+		unless validate_category_counts(categories)
+			raise Exception.new(INVALID_CATEGORIES_MESSAGE)
+		end
 		document = PdfBuilder.new(two_columns: false)
 		people_to_find = categories.count
 		categories.each do |category|

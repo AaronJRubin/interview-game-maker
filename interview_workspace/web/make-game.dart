@@ -14,7 +14,6 @@ int categoryIDCounter = 0;
 main() {
   initialize(fetchCachedCategories());
   updateClassSizeDisplay();
-  List<AnchorElement> links = document.querySelectorAll("nav a");
   window.onUnload.listen((t) => save());
   Element dropdownCaret = document.querySelector("#dropdown-caret");
   DivElement explanationDropdown = document.querySelector(".explanation-dropdown");

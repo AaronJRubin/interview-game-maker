@@ -1,7 +1,7 @@
 
 task :test do
-	`ruby web_test.rb`
-	`ruby category_test.rb`
+	tests = FileList.new("*_test.rb")
+	tests.each do |test| sh "bundle exec ruby #{test}" end	
 end
 
 task :generate do

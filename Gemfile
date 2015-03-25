@@ -1,13 +1,8 @@
 source "https://rubygems.org"
 
-#group :development, :test do
-#	gem 'sinatra', git: 'git@github.com:sinatra/sinatra.git'
-#end
-
-#group :production do
 gem 'sinatra'
-#end
-
+gem 'sinatra-fix_951', require: 'sinatra/fix_951'
+gem 'minitest'
 gem 'rack'
 gem 'rack-test'
 gem 'rake'
