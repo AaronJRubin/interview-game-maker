@@ -12,7 +12,7 @@ class App < Sinatra::Application
 	set :public_folder, 'interview_workspace/build/web'
 
 	get '/' do
-		send_file 'interview_workspace/build/web/make-game.html'
+		redirect '/make-game.html'
 	end
 
 	post '/' do
