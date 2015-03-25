@@ -94,58 +94,46 @@ class Category
 		end
 	end
 
-	def self.latex_descriptions_from_categories(categories, people_to_find = 5)
+	def self.person_set(description_sets, name_roulette)
+		item_count = description_sets.first.length
+		people = []
+		shuffled_description_sets = description_sets.map do |description_set| description_set.shuffle end
+		(0...item_count).each do |item_number|
+			paragraph = ["Your name is #{name_roulette.next_name}"]
+			this_persons_descriptions = shuffled_description_sets.map do |description_set| description_set[item_number] end
+			paragraph.concat(this_persons_descriptions)
+			people << paragraph
+		end	
+		return people
+	end
+
+	def self.latex_descriptions_from_categories(categories) 
 		validate_category_counts(categories)
-		item_count = categories.first.item_count
 		document = PdfBuilder.new(two_columns: true)
-		descriptions = categories.map do |category| category.descriptions end
-		names = NameRoulette.new
+		description_sets = categories.map do |category| category.descriptions end
+		name_roulette = NameRoulette.new
+		people_to_find = categories.count
 		people_to_find.times do
-			descriptions.each do |description|
-				description.shuffle!
-			end
-			(0...item_count).each do |item_number|
-				paragraph = []
-				paragraph << "Your name is #{names.next_name}."
-				descriptions.each do |description|
-					paragraph << description[item_number]
-				end
-				document.addParagraph(paragraph)
-			end
+			person_set(description_sets, name_roulette).each do |person| document.addParagraph(person) end 
 		end
-		extra_count = 0
 		document.startBold
-		# We need to refactor this, it's not DRY at all
-		while extra_count < 5 do
-			descriptions.each do |description|
-				description.shuffle!
-			end
-			(0...item_count).each do |item_number|
-				paragraph = []
-				paragraph << "Your name is #{names.next_name}."
-				descriptions.each do |description|
-					paragraph << description[item_number]
-				end
-				document.addParagraph(paragraph)
-				extra_count += 1
-				if extra_count > 5
-					break
-				end
-			end
+		extra_people = []
+		while extra_people.length < 5
+			extra_people.concat(person_set(description_sets, name_roulette))
 		end
+		extra_people.take(5).each do |extra_person| document.addParagraph(extra_person) end
 		document.endBold
 		document.endDocument
 		return document.latexDocument
 	end
 
-	def self.latex_tasks_from_categories(categories, people_to_find = 5)
+	def self.latex_tasks_from_categories(categories) 
 		validate_category_counts(categories)
 		document = PdfBuilder.new(two_columns: false)
+		people_to_find = categories.count
 		categories.each do |category|
 			category.tasks(people_to_find).each do |task|
-				paragraph = []
-				paragraph << task
-				paragraph << category.hint
+				paragraph = [task, category.hint]
 				document.addParagraph(paragraph)
 			end
 		end
@@ -154,15 +142,11 @@ class Category
 				[task, category.hint]
 			end
 		end . flatten(1)
-		all_tasks.shuffle!
-		extra_task = 0
 		document.startBold
-		while extra_task < 5
-			document.addParagraph(all_tasks[extra_task % all_tasks.count])
-			extra_task += 1
-		end
+		all_tasks.shuffle!
+		all_tasks.take(5).each do |task| document.addParagraph(task) end
 		document.endBold
-		document.endDocument
+		document.endDocument	
 		return document.latexDocument
 	end
 end
