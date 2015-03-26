@@ -1,7 +1,5 @@
 import 'dart:html';
 import 'dart:convert';
-import 'dart:math';
-import 'dart:async';
 import 'package:interview_workspace/cryptoutils.dart';
 
 UListElement categories = document.querySelector(".categories");
@@ -12,7 +10,7 @@ int currentItemCount = 5;
 int categoryIDCounter = 0;
 
 main() {
-  initialize(fetchCachedCategories());
+  initialize();
   updateClassSizeDisplay();
   window.onUnload.listen((t) => save());
   Element dropdownCaret = document.querySelector("#dropdown-caret");
@@ -71,20 +69,11 @@ main() {
       downloads.append(pdfDownloadLink("目的.pdf", tasks));
     });
   });
-  ButtonElement saveButton = document.querySelector(".save");
-  saveButton.onClick.listen((e) {
-    save();
-    saveButton.disabled = true;
-    saveButton.text = "保存しました";
-    new Timer(new Duration(seconds: 2), () {
-      saveButton.disabled = false;
-      saveButton.text = "保存する";
-    });
-  });
 }
 
 void save() {
  cacheCategories(getCategories());
+ window.localStorage["itemCount"] = currentItemCount.toString();
 }
 
 AnchorElement pdfDownloadLink(String filename, String base64) {
@@ -131,14 +120,14 @@ bool validateCategories(List<Map> categoryMaps) {
 void cacheCategories(List<Map> categoryMaps) {
   window.localStorage["categories"] = JSON.encode(categoryMaps);
 }
-
+/*
 List<Map> fetchCachedCategories() {
    String cachedCategories = window.localStorage["categories"];
    if (cachedCategories == null) {
     return null;
    }
    return JSON.decode(cachedCategories);
-}
+}*/
 
 const Map theEmptyCategory = const {"items" : const [], "fragment" : "", "question" : "", "possessive" : false };
 
@@ -221,13 +210,11 @@ void updateClassSizeDisplay() {
 }
 
 
-void initialize([List<Map> cachedCategories]) {
+void initialize() {
   categories.children.clear();
-  if (cachedCategories != null) {
-    currentItemCount = cachedCategories.map((category) => category["items"].length).reduce(max);
-    if (currentItemCount == 0) {
-      currentItemCount = 5;
-    }
+  if (window.localStorage["categories"] != null && window.localStorage["itemCount"] != null) {
+    currentItemCount = int.parse(window.localStorage["itemCount"]);
+    List<Map> cachedCategories = JSON.decode(window.localStorage["categories"]);
     cachedCategories.forEach((cachedCategory) => addCategory(cachedCategory));
   } else {
     currentItemCount = 5;

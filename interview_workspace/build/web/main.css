@@ -241,29 +241,23 @@ button:disabled {
   background-color: grey;
 }
 
-/* line 162, ../sass/main.scss */
-.save {
-  display: block;
-  width: 100%;
-}
-
-/* line 168, ../sass/main.scss */
+/* line 163, ../sass/main.scss */
 .edit-buttons button {
   width: 32%;
 }
 
-/* line 174, ../sass/main.scss */
+/* line 169, ../sass/main.scss */
 .global-buttons button {
   width: 48%;
 }
 
-/* line 179, ../sass/main.scss */
+/* line 174, ../sass/main.scss */
 .delete-button {
   position: relative;
   left: calc(100% - 50px);
 }
 
-/* line 184, ../sass/main.scss */
+/* line 179, ../sass/main.scss */
 .dropdown-control {
   background-color: #222222;
   padding: .2em .5em;
@@ -271,7 +265,7 @@ button:disabled {
   border-radius: 10px;
 }
 
-/* line 191, ../sass/main.scss */
+/* line 186, ../sass/main.scss */
 #dropdown-caret {
   display: inline-block;
   border-radius: 50%;
@@ -285,12 +279,12 @@ button:disabled {
   -webkit-user-select: none;
   user-select: none;
 }
-/* line 197, ../sass/main.scss */
+/* line 192, ../sass/main.scss */
 #dropdown-caret:hover {
   background-color: purple;
 }
 
-/* line 205, ../sass/main.scss */
+/* line 200, ../sass/main.scss */
 #dropdown-caret.collapsed {
   -moz-transform: rotate(90deg);
   -ms-transform: rotate(90deg);
@@ -298,7 +292,7 @@ button:disabled {
   transform: rotate(90deg);
 }
 
-/* line 209, ../sass/main.scss */
+/* line 204, ../sass/main.scss */
 .explanation-dropdown.collapsed {
   display: none;
 }
