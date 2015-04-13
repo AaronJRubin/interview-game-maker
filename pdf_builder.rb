@@ -49,6 +49,14 @@ class PdfBuilder
 		@document.dup
 	end
 
+	def self.writePDF(document, filename)
+		file = File.new(filename.pathmap("%X.tex"), "w")
+		file.write(document)
+		file.close
+		`pdflatex #{file.path}`
+		`rm #{file.path}`
+	end
+
 	def self.base64PDF(document)
 		file = Tempfile.new("")
 		file.write(document)

@@ -2,4 +2,7 @@ interview_workspace/.sass-cache/
 interview_workspace/web/main.css
 interview_workspace/web/index.html
 interview_workspace/web/introduction.html
+*.log
+*.pdf
+*.aux
 *.swp
