@@ -6,7 +6,9 @@ class PdfBuilder
 	#LINES_PER_PAGE = 48
 
 	def initialize(two_columns: false)
-		@document = "\\documentclass[10pt, letterpaper]{minimal}\n"
+		@document = "\\documentclass[12pt, letterpaper]{minimal}\n"
+		@document << "\\usepackage{geometry}"
+		@document << "\\geometry{margin=0.5in}"
 		@document << "\\setlength{\\parindent}{0pt}\n"
 		if two_columns
 			@document << "\\twocolumn\n"
