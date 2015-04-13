@@ -97,7 +97,7 @@ class Category
 		people = []
 		shuffled_description_sets = description_sets.map do |description_set| description_set.shuffle end
 		(0...item_count).each do |item_number|
-			paragraph = ["Your name is #{name_roulette.next_name}"]
+			paragraph = ["Your name is #{name_roulette.next_name}."]
 			this_persons_descriptions = shuffled_description_sets.map do |description_set| description_set[item_number] end
 			paragraph.concat(this_persons_descriptions)
 			people << paragraph
