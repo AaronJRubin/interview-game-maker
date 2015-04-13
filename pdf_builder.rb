@@ -8,7 +8,7 @@ class PdfBuilder
 	def initialize(two_columns: false)
 		@document = "\\documentclass[12pt, letterpaper]{minimal}\n"
 		@document << "\\usepackage{geometry}"
-		@document << "\\geometry{margin=0.5in}"
+		@document << "\\geometry{margin=0.25in}"
 		@document << "\\setlength{\\parindent}{0pt}\n"
 		if two_columns
 			@document << "\\twocolumn\n"
