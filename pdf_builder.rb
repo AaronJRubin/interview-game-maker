@@ -3,7 +3,7 @@ class PdfBuilder
 	require 'base64'
 	require 'rake'
 
-	#LINES_PER_PAGE = 48
+	LATEX_SPECIAL_CHAR = /[\\{}$&#^_%~]/
 
 	def initialize(two_columns: false)
 		@document = "\\documentclass[12pt, letterpaper]{minimal}\n"
@@ -26,7 +26,7 @@ class PdfBuilder
 		#end
 		#@remaining_lines -= lines.count + 1 # for blank line after paragraph
 		lines.each do |line|
-			@document << line + "\\\\"
+			@document << PdfBuilder::escape(line) + "\\\\"
 		end
 		@document << "\n\n"
 		return
@@ -69,5 +69,16 @@ class PdfBuilder
 		`rm #{file.path.pathmap("%n.*")}`
 		return pdf_file_64
 	end
+
+	def self.escape(s)
+  		s.gsub(LATEX_SPECIAL_CHAR) do |c|
+    		case c
+    		when "\\" then '\backslash{}'
+    		when "^" then '\^{}'
+    		when '~' then '\~{}'
+    		else "\\#{c}"
+    	end
+  	end
+end
 							
 end
