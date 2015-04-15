@@ -1,28 +1,28 @@
 class PdfBuilder
-	
+
 	require 'base64'
 	require 'rake'
 
 	LATEX_SPECIAL_CHAR = /[\\{}$&#^_%~]/
 
-	def initialize(two_columns: false)
-		@document = "\\documentclass[12pt, letterpaper]{minimal}\n"
-		@document << "\\usepackage{geometry}"
-		@document << "\\geometry{margin=0.25in}"
-		@document << "\\setlength{\\parindent}{0pt}\n"
-		if two_columns
-			@document << "\\twocolumn\n"
+		def initialize(two_columns: false)
+			@document = "\\documentclass[12pt, letterpaper]{minimal}\n"
+			@document << "\\usepackage{geometry}"
+			@document << "\\geometry{margin=0.25in}"
+			@document << "\\setlength{\\parindent}{0pt}\n"
+			if two_columns
+				@document << "\\twocolumn\n"
+			end
+			@document << "\\widowpenalties 1 10000\n"
+			@document << "\\raggedbottom\n"
+			@document << "\\begin{document}\n"
+			#@remaining_lines = LINES_PER_PAGE
 		end
-		@document << "\\widowpenalties 1 10000\n"
-		@document << "\\raggedbottom\n"
-		@document << "\\begin{document}\n"
-		#@remaining_lines = LINES_PER_PAGE
-	end
 
 	def addParagraph(lines)
 		#if (lines.count > @remaining_lines)
 		#	@document << "\\pagebreak\n"
-			#@remaining_lines = LINES_PER_PAGE
+		#@remaining_lines = LINES_PER_PAGE
 		#end
 		#@remaining_lines -= lines.count + 1 # for blank line after paragraph
 		lines.each do |line|
@@ -71,14 +71,14 @@ class PdfBuilder
 	end
 
 	def self.escape(s)
-  		s.gsub(LATEX_SPECIAL_CHAR) do |c|
-    		case c
-    		when "\\" then '\backslash{}'
-    		when "^" then '\^{}'
-    		when '~' then '\~{}'
-    		else "\\#{c}"
-    	end
-  	end
-end
-							
+		s.gsub(LATEX_SPECIAL_CHAR) do |c|
+			case c
+			when "\\" then '\backslash{}'
+			when "^" then '\^{}'
+			when '~' then '\~{}'
+			else "\\#{c}"
+			end
+		end
+	end
+
 end

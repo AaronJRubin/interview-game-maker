@@ -157,12 +157,12 @@ end
 class NameRoulette
 
 	NAMES = ["Edward", "Emma", "Ellie", "Emmett", "Evan", 
-					"Alex", "Alexis", "Andrew", "Amelia", "Amanda",
-					"Dennis", "Denise", "Daniel", "David", "Dwight",
-					"Brian", "Bob", "Betty", "Barry", "Barney",
-					"Max", "Mindy", "Michelle", "Michael", "Martin",
-					"Steve", "Joe", "Stephanie", "Sam", "Samantha",
-					"Simon", "Jennifer", "Jeff", "Jake", "Elliot"]
+		"Alex", "Alexis", "Andrew", "Amelia", "Amanda",
+		"Dennis", "Denise", "Daniel", "David", "Dwight",
+		"Brian", "Bob", "Betty", "Barry", "Barney",
+		"Max", "Mindy", "Michelle", "Michael", "Martin",
+		"Steve", "Joe", "Stephanie", "Sam", "Samantha",
+		"Simon", "Jennifer", "Jeff", "Jake", "Elliot"]
 
 	def initialize
 		@names = NAMES.shuffle
